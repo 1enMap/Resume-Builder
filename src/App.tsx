@@ -31,7 +31,6 @@ export default function App() {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    removeAfterPrint: true,
     onBeforeGetContent: () => {
       if (!data.personalInfo.fullName) {
         setToast({
@@ -40,11 +39,17 @@ export default function App() {
         });
         return false;
       }
-      return true;
+      return Promise.resolve();
+    },
+    onAfterPrint: () => {
+      setToast({
+        message: 'Resume exported successfully!',
+        type: 'success',
+      });
     },
     onPrintError: () => {
       setToast({
-        message: 'An error occurred while printing. Please try again.',
+        message: 'An error occurred while exporting. Please try again.',
         type: 'error',
       });
     },
@@ -67,7 +72,7 @@ export default function App() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
               <FileText className="w-8 h-8 text-blue-500" />
-              <span className="ml-2 text-xl font-semibold text-gray-900">Resume Builder</span>
+              <span className="ml-2 text-xl font-semibold text-gray-900">QuikResumeBuilder</span>
             </div>
             <div className="flex items-center space-x-4">
               <button
@@ -143,6 +148,11 @@ export default function App() {
           onClose={() => setToast(null)}
         />
       )}
+
+      {/* Hidden preview for printing */}
+      <div style={{ display: 'none' }}>
+        <ResumePreview ref={componentRef} data={data} />
+      </div>
     </div>
   );
 }

@@ -8,16 +8,23 @@ interface ResumePreviewProps {
   data: ResumeData;
 }
 
-const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(({ data }, ref) => {
-  const templates = {
-    modern: ModernTemplate,
-    classic: ClassicTemplate,
-    minimal: MinimalTemplate,
-  };
+const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(
+  ({ data }, ref) => {
+    const templates = {
+      modern: ModernTemplate,
+      classic: ClassicTemplate,
+      minimal: MinimalTemplate,
+    };
 
-  const SelectedTemplate = templates[data.template];
-  return <div ref={ref}><SelectedTemplate data={data} /></div>;
-});
+    const SelectedTemplate = templates[data.template];
+
+    return (
+      <div ref={ref} className="bg-white">
+        <SelectedTemplate data={data} />
+      </div>
+    );
+  }
+);
 
 ResumePreview.displayName = 'ResumePreview';
 

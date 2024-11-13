@@ -2,6 +2,10 @@
 
 A modern, feature-rich resume builder application built with React and TypeScript. Create professional resumes with ease, get instant feedback, and export to PDF.
 
+## Live Demo
+
+Check out the live version of this project [here](https://superlative-gaufre-ed0ee0.netlify.app/).
+
 ![Dashboard](./images/resu1.png)
 
 ## Features
